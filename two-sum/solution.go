@@ -7,14 +7,14 @@ func twoSum(nums []int, target int) []int {
 		return []int{}
 	}
 
-	for i, num := range nums {
-		for j, restNum := range nums {
-			if i == j {
+	for i1, num1 := range nums {
+		for i2, num2 := range nums {
+			if i1 == i2 {
 				continue
 			}
 
-			if num+restNum == target {
-				return []int{i, j}
+			if num1+num2 == target {
+				return []int{i1, i2}
 			}
 		}
 	}
