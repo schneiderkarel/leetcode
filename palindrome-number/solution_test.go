@@ -29,7 +29,7 @@ func Test_isPalindrome(t *testing.T) {
 			},
 		},
 		{
-			name: "negative x",
+			name: "negative non-palindrome x",
 			args: args{
 				x: -1001,
 			},
@@ -38,7 +38,7 @@ func Test_isPalindrome(t *testing.T) {
 			},
 		},
 		{
-			name: "positive x",
+			name: "positive non-palindrome x",
 			args: args{
 				x: 100,
 			},
@@ -47,7 +47,7 @@ func Test_isPalindrome(t *testing.T) {
 			},
 		},
 		{
-			name: "invalid x",
+			name: "invalid entry",
 			args: args{
 				x: int(math.Pow(-2, 31) - 1),
 			},
