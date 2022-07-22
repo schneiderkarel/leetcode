@@ -1,4 +1,4 @@
-package main
+package palindrome_number
 
 import (
 	"math"
