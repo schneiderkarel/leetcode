@@ -23,17 +23,17 @@ func twoSum(nums []int, target int) []int {
 }
 
 func validEntries(nums []int, target int) bool {
-	if len(nums) < 2 || float64(len(nums)) > math.Pow(10, 4) {
+	if len(nums) < 2 || float64(len(nums)) > math.Pow10(4) {
 		return false
 	}
 
 	for _, num := range nums {
-		if float64(num) < math.Pow(-10, 9) || float64(num) > math.Pow(10, 9) {
+		if float64(num) < -math.Pow10(9) || float64(num) > math.Pow10(9) {
 			return false
 		}
 	}
 
-	if float64(target) < math.Pow(-10, 9) || float64(target) > math.Pow(10, 9) {
+	if float64(target) < -math.Pow10(9) || float64(target) > math.Pow10(9) {
 		return false
 	}
 

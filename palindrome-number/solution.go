@@ -24,7 +24,7 @@ func isPalindrome(x int) bool {
 }
 
 func validEntry(x int) bool {
-	if float64(x) < math.Pow(-2, 31) || float64(x) > math.Pow(2, 31)-1 {
+	if float64(x) < -math.Pow(2, 31) || float64(x) > math.Pow(2, 31)-1 {
 		return false
 	}
 
