@@ -7,12 +7,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_isPalindrome(t *testing.T) {
+func Test_lengthOfLastWord(t *testing.T) {
 	type args struct {
-		x int
+		s string
 	}
 	type exp struct {
-		res bool
+		res int
 	}
 	tcs := []struct {
 		name string
@@ -20,53 +20,44 @@ func Test_isPalindrome(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "positive palindrome x",
+			name: "ok - prefix space",
 			args: args{
-				x: 1001,
+				s: "   pear apple",
 			},
 			exp: exp{
-				res: true,
+				res: 5,
 			},
 		},
 		{
-			name: "negative non-palindrome x",
+			name: "ok - suffix space",
 			args: args{
-				x: -1001,
+				s: "pear apple   ",
 			},
 			exp: exp{
-				res: false,
-			},
-		},
-		{
-			name: "positive non-palindrome x",
-			args: args{
-				x: 100,
-			},
-			exp: exp{
-				res: false,
+				res: 5,
 			},
 		},
 		{
 			name: "invalid entry",
 			args: args{
-				x: int(math.Pow(-2, 31) - 1),
+				s: "",
 			},
 			exp: exp{
-				res: false,
+				res: 0,
 			},
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, isPalindrome(tc.args.x))
+			assert.Equal(t, tc.exp.res, lengthOfLastWord(tc.args.s))
 		})
 	}
 }
 
-func Test_validEntry(t *testing.T) {
+func Test_validEntries(t *testing.T) {
 	type args struct {
-		x int
+		s string
 	}
 	type exp struct {
 		res bool
@@ -77,36 +68,36 @@ func Test_validEntry(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "valid positive x",
+			name: "ok - short",
 			args: args{
-				x: int(math.Pow(2, 31) - 1),
+				s: "a",
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "valid negative x",
+			name: "ok - long",
 			args: args{
-				x: int(-math.Pow(2, 31) + 1),
+				s: string(make([]byte, int(math.Pow10(4)))),
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "invalid positive x",
+			name: "invalid entry - too short",
 			args: args{
-				x: int(math.Pow(2, 31) + 1),
+				s: "",
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid negative x",
+			name: "invalid entry - too long",
 			args: args{
-				x: int(-math.Pow(2, 31) - 1),
+				s: string(make([]byte, int(math.Pow10(4)+1))),
 			},
 			exp: exp{
 				res: false,
@@ -116,7 +107,7 @@ func Test_validEntry(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, validEntry(tc.args.x))
+			assert.Equal(t, tc.exp.res, validEntries(tc.args.s))
 		})
 	}
 }

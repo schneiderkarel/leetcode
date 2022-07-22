@@ -83,20 +83,20 @@ func Test_validEntries(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "valid - edge 1",
+			name: "valid - edge case 1",
 			args: args{
-				nums:   make([]int, int(math.Pow(10, 4))),
-				target: int(math.Pow(10, 9)),
+				nums:   make([]int, int(math.Pow10(4))),
+				target: int(math.Pow10(9)),
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "valid - edge 2",
+			name: "valid - edge case 2",
 			args: args{
-				nums:   []int{int(math.Pow(-10, 9)), int(math.Pow(10, 9))},
-				target: int(math.Pow(-10, 9)),
+				nums:   []int{int(-math.Pow10(9)), int(math.Pow10(9))},
+				target: int(-math.Pow10(9)),
 			},
 			exp: exp{
 				res: true,
@@ -115,7 +115,7 @@ func Test_validEntries(t *testing.T) {
 		{
 			name: "not valid - nums too long",
 			args: args{
-				nums:   make([]int, int(math.Pow(10, 4)+1)),
+				nums:   make([]int, int(math.Pow10(4)+1)),
 				target: 0,
 			},
 			exp: exp{
@@ -125,7 +125,7 @@ func Test_validEntries(t *testing.T) {
 		{
 			name: "not valid - num in nums too small",
 			args: args{
-				nums:   []int{int(math.Pow(-10, 9) - 1), 2},
+				nums:   []int{int(-math.Pow10(9) - 1), 2},
 				target: 0,
 			},
 			exp: exp{
@@ -135,7 +135,7 @@ func Test_validEntries(t *testing.T) {
 		{
 			name: "not valid - num in nums too big",
 			args: args{
-				nums:   []int{int(math.Pow(10, 9) + 1), 2},
+				nums:   []int{int(math.Pow10(9) + 1), 2},
 				target: 0,
 			},
 			exp: exp{
@@ -146,7 +146,7 @@ func Test_validEntries(t *testing.T) {
 			name: "not valid - target too small",
 			args: args{
 				nums:   []int{1, 2},
-				target: int(math.Pow(-10, 9) - 1),
+				target: int(-math.Pow10(9) - 1),
 			},
 			exp: exp{
 				res: false,
@@ -156,7 +156,7 @@ func Test_validEntries(t *testing.T) {
 			name: "not valid - target too big",
 			args: args{
 				nums:   []int{1, 2},
-				target: int(math.Pow(10, 9) + 1),
+				target: int(math.Pow10(9) + 1),
 			},
 			exp: exp{
 				res: false,
