@@ -34,7 +34,7 @@ func Test_twoSum(t *testing.T) {
 			name: "ok negative",
 			args: args{
 				nums:   []int{-1, -6, 0},
-				target: -7,
+				target: 10,
 			},
 			exp: exp{
 				res: []int{1, 0},
