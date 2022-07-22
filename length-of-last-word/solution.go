@@ -7,7 +7,7 @@ func lengthOfLastWord(s string) int {
 		return 0
 	}
 
-	var res string
+	var count int
 
 	for i := len(s) - 1; i >= 0; i-- {
 		if s[i] == ' ' {
@@ -15,17 +15,17 @@ func lengthOfLastWord(s string) int {
 				continue
 			}
 
-			if s[i+1] != ' ' && len(res) > 0 {
-				return len(res)
+			if s[i+1] != ' ' && count > 0 {
+				return count
 			}
 
 			continue
 		}
 
-		res += string(s[i])
+		count++
 	}
 
-	return len(res)
+	return count
 }
 
 func validEntries(s string) bool {
