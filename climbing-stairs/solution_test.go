@@ -76,7 +76,7 @@ func Test_validEntry(t *testing.T) {
 			},
 		},
 		{
-			name: "invalid - small",
+			name: "invalid - beyond min",
 			args: args{
 				n: 0,
 			},
@@ -85,7 +85,7 @@ func Test_validEntry(t *testing.T) {
 			},
 		},
 		{
-			name: "invalid - large",
+			name: "invalid - beyond max",
 			args: args{
 				n: 46,
 			},

@@ -7,8 +7,8 @@ func climbStairs(n int) int {
 
 	var fbSq = []int{0, 1, 1}
 
-	for i := 1; i <= n; i++ {
-		fbSq = append(fbSq, fbSq[i]+fbSq[i+1])
+	for i := 2; i <= n; i++ {
+		fbSq = append(fbSq, fbSq[i-1]+fbSq[i])
 	}
 
 	return fbSq[n+1]
