@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"math"
+	"strconv"
 )
 
 func isPalindrome(x int) bool {
@@ -10,16 +10,12 @@ func isPalindrome(x int) bool {
 		return false
 	}
 
-	str := fmt.Sprintf("%d", x)
+	str := strconv.Itoa(x)
 
-	for i, v := range str {
+	for i, char := range str[:len(str)/2] {
 		i++
 
-		if i > len(str)/2 {
-			break
-		}
-
-		if uint8(v) != str[len(str)-i] {
+		if uint8(char) != str[len(str)-i] {
 			return false
 		}
 	}
