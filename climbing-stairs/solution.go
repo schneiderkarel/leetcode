@@ -1,4 +1,4 @@
-package main
+package climbing_stairs
 
 func climbStairs(n int) int {
 	if !validEntry(n) {
