@@ -161,7 +161,7 @@ func Test_areEntryNumbersValid(t *testing.T) {
 			},
 		},
 		{
-			name: "invalid - num in nums too low",
+			name: "invalid - nums num too low",
 			args: args{
 				nums: []int{int(-math.Pow10(9) - 1), 2},
 			},
@@ -170,7 +170,7 @@ func Test_areEntryNumbersValid(t *testing.T) {
 			},
 		},
 		{
-			name: "invalid - num in nums too high",
+			name: "invalid - nums num too high",
 			args: args{
 				nums: []int{int(math.Pow10(9) + 1), 2},
 			},

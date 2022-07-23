@@ -1,18 +1,17 @@
-package length_of_last_word
+package longest_common_prefix
 
 import (
-	"math"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_lengthOfLastWord(t *testing.T) {
+func Test_longestCommonPrefix(t *testing.T) {
 	type args struct {
-		str string
+		strs []string
 	}
 	type exp struct {
-		res int
+		res string
 	}
 	tcs := []struct {
 		name string
@@ -20,53 +19,49 @@ func Test_lengthOfLastWord(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "ok - prefix space",
+			name: "valid - prefix",
 			args: args{
-				str: "   pear apple",
+				strs: []string{"app", "apple", "application"},
 			},
 			exp: exp{
-				res: 5,
+				res: "app",
 			},
 		},
 		{
-			name: "ok - suffix space",
+			name: "valid - no prefix",
 			args: args{
-				str: "pear apple   ",
+				strs: []string{"apple", "pear", "cherry"},
 			},
 			exp: exp{
-				res: 5,
-			},
-		},
-		{
-			name: "ok - short",
-			args: args{
-				str: "a ",
-			},
-			exp: exp{
-				res: 1,
+				res: "",
 			},
 		},
 		{
 			name: "invalid entry",
 			args: args{
-				str: "",
+				strs: []string{},
 			},
 			exp: exp{
-				res: 0,
+				res: "",
 			},
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, lengthOfLastWord(tc.args.str))
+			assert.Equal(t, tc.exp.res, longestCommonPrefix(tc.args.strs))
 		})
 	}
 }
 
-func Test_isEntryStringValid(t *testing.T) {
+func Test_areEntryStringsValid(t *testing.T) {
+	var longStrs []string
+	for i := 0; i < 200; i++ {
+		longStrs = append(longStrs, "a")
+	}
+
 	type args struct {
-		str string
+		strs []string
 	}
 	type exp struct {
 		res bool
@@ -79,7 +74,7 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "valid - short",
 			args: args{
-				str: "a",
+				strs: []string{"apple"},
 			},
 			exp: exp{
 				res: true,
@@ -88,7 +83,7 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "valid - long",
 			args: args{
-				str: string(make([]byte, int(math.Pow10(4)))),
+				strs: longStrs,
 			},
 			exp: exp{
 				res: true,
@@ -97,7 +92,7 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "invalid - too short",
 			args: args{
-				str: "",
+				strs: []string{},
 			},
 			exp: exp{
 				res: false,
@@ -106,16 +101,25 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "invalid - too long",
 			args: args{
-				str: string(make([]byte, int(math.Pow10(4)+1))),
+				strs: append(longStrs, "a"),
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid - no non whitespace char in str",
+			name: "invalid - strs str too long",
 			args: args{
-				str: "      ",
+				strs: []string{string(make([]byte, 201))},
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+		{
+			name: "invalid - invalid char inside strs",
+			args: args{
+				strs: []string{"A"},
 			},
 			exp: exp{
 				res: false,
@@ -125,7 +129,7 @@ func Test_isEntryStringValid(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, isEntryStringValid(tc.args.str))
+			assert.Equal(t, tc.exp.res, areEntryStringsValid(tc.args.strs))
 		})
 	}
 }
