@@ -9,7 +9,7 @@ import (
 
 func Test_isPalindrome(t *testing.T) {
 	type args struct {
-		x int
+		num int
 	}
 	type exp struct {
 		res bool
@@ -20,27 +20,27 @@ func Test_isPalindrome(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "positive palindrome x",
+			name: "positive palindrome num",
 			args: args{
-				x: 1001,
+				num: 1001,
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "negative non-palindrome x",
+			name: "negative non-palindrome num",
 			args: args{
-				x: -1001,
+				num: -1001,
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "positive non-palindrome x",
+			name: "positive non-palindrome num",
 			args: args{
-				x: 100,
+				num: 100,
 			},
 			exp: exp{
 				res: false,
@@ -49,7 +49,7 @@ func Test_isPalindrome(t *testing.T) {
 		{
 			name: "invalid entry",
 			args: args{
-				x: int(math.Pow(-2, 31) - 1),
+				num: int(math.Pow(-2, 31) - 1),
 			},
 			exp: exp{
 				res: false,
@@ -59,14 +59,14 @@ func Test_isPalindrome(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, isPalindrome(tc.args.x))
+			assert.Equal(t, tc.exp.res, isPalindrome(tc.args.num))
 		})
 	}
 }
 
-func Test_validEntry(t *testing.T) {
+func Test_isEntryNumberValid(t *testing.T) {
 	type args struct {
-		x int
+		num int
 	}
 	type exp struct {
 		res bool
@@ -77,36 +77,36 @@ func Test_validEntry(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "valid positive x",
+			name: "valid - low",
 			args: args{
-				x: int(math.Pow(2, 31) - 1),
+				num: int(-math.Pow(2, 31) + 1),
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "valid negative x",
+			name: "valid - high",
 			args: args{
-				x: int(-math.Pow(2, 31) + 1),
+				num: int(math.Pow(2, 31) - 1),
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "invalid positive x",
+			name: "invalid - too low",
 			args: args{
-				x: int(math.Pow(2, 31) + 1),
+				num: int(-math.Pow(2, 31) - 1),
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid negative x",
+			name: "invalid - too high",
 			args: args{
-				x: int(-math.Pow(2, 31) - 1),
+				num: int(math.Pow(2, 31) + 1),
 			},
 			exp: exp{
 				res: false,
@@ -116,7 +116,7 @@ func Test_validEntry(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, validEntry(tc.args.x))
+			assert.Equal(t, tc.exp.res, isEntryNumberValid(tc.args.num))
 		})
 	}
 }

@@ -9,7 +9,7 @@ import (
 
 func Test_lengthOfLastWord(t *testing.T) {
 	type args struct {
-		s string
+		str string
 	}
 	type exp struct {
 		res int
@@ -22,7 +22,7 @@ func Test_lengthOfLastWord(t *testing.T) {
 		{
 			name: "ok - prefix space",
 			args: args{
-				s: "   pear apple",
+				str: "   pear apple",
 			},
 			exp: exp{
 				res: 5,
@@ -31,16 +31,25 @@ func Test_lengthOfLastWord(t *testing.T) {
 		{
 			name: "ok - suffix space",
 			args: args{
-				s: "pear apple   ",
+				str: "pear apple   ",
 			},
 			exp: exp{
 				res: 5,
 			},
 		},
 		{
+			name: "ok - short",
+			args: args{
+				str: "a ",
+			},
+			exp: exp{
+				res: 1,
+			},
+		},
+		{
 			name: "invalid entry",
 			args: args{
-				s: "",
+				str: "",
 			},
 			exp: exp{
 				res: 0,
@@ -50,14 +59,14 @@ func Test_lengthOfLastWord(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, lengthOfLastWord(tc.args.s))
+			assert.Equal(t, tc.exp.res, lengthOfLastWord(tc.args.str))
 		})
 	}
 }
 
-func Test_validEntries(t *testing.T) {
+func Test_isEntryStringValid(t *testing.T) {
 	type args struct {
-		s string
+		str string
 	}
 	type exp struct {
 		res bool
@@ -68,36 +77,36 @@ func Test_validEntries(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "ok - short",
+			name: "valid - short",
 			args: args{
-				s: "a",
+				str: "a",
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "ok - long",
+			name: "valid - long",
 			args: args{
-				s: string(make([]byte, int(math.Pow10(4)))),
+				str: string(make([]byte, int(math.Pow10(4)))),
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "invalid entry - too short",
+			name: "invalid - too short",
 			args: args{
-				s: "",
+				str: "",
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid entry - too long",
+			name: "invalid - too long",
 			args: args{
-				s: string(make([]byte, int(math.Pow10(4)+1))),
+				str: string(make([]byte, int(math.Pow10(4)+1))),
 			},
 			exp: exp{
 				res: false,
@@ -107,7 +116,7 @@ func Test_validEntries(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, validEntries(tc.args.s))
+			assert.Equal(t, tc.exp.res, isEntryStringValid(tc.args.str))
 		})
 	}
 }

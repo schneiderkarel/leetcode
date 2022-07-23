@@ -8,7 +8,7 @@ import (
 
 func Test_climbStairs(t *testing.T) {
 	type args struct {
-		n int
+		num int
 	}
 	type exp struct {
 		res int
@@ -21,7 +21,7 @@ func Test_climbStairs(t *testing.T) {
 		{
 			name: "ok",
 			args: args{
-				n: 8,
+				num: 8,
 			},
 			exp: exp{
 				res: 34,
@@ -30,7 +30,7 @@ func Test_climbStairs(t *testing.T) {
 		{
 			name: "invalid entry",
 			args: args{
-				n: -1,
+				num: -1,
 			},
 			exp: exp{
 				res: 0,
@@ -40,14 +40,14 @@ func Test_climbStairs(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, climbStairs(tc.args.n))
+			assert.Equal(t, tc.exp.res, climbStairs(tc.args.num))
 		})
 	}
 }
 
-func Test_validEntry(t *testing.T) {
+func Test_isEntryValid(t *testing.T) {
 	type args struct {
-		n int
+		num int
 	}
 	type exp struct {
 		res bool
@@ -58,36 +58,36 @@ func Test_validEntry(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "valid - min",
+			name: "valid - low",
 			args: args{
-				n: 1,
+				num: 1,
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "valid - max",
+			name: "valid - high",
 			args: args{
-				n: 45,
+				num: 45,
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "invalid - beyond min",
+			name: "invalid - too low",
 			args: args{
-				n: 0,
+				num: 0,
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid - beyond max",
+			name: "invalid - too high",
 			args: args{
-				n: 46,
+				num: 46,
 			},
 			exp: exp{
 				res: false,
@@ -97,7 +97,7 @@ func Test_validEntry(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, validEntry(tc.args.n))
+			assert.Equal(t, tc.exp.res, isEntryNumberValid(tc.args.num))
 		})
 	}
 }

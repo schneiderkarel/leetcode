@@ -1,35 +1,37 @@
 package length_of_last_word
 
-import "math"
+import (
+	"math"
+)
 
-func lengthOfLastWord(s string) int {
-	if !validEntries(s) {
+func lengthOfLastWord(str string) int {
+	if !isEntryStringValid(str) {
 		return 0
 	}
 
-	var count int
+	var lastWordLen int
 
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == ' ' {
-			if i == len(s)-1 {
+	for i := len(str) - 1; i >= 0; i-- {
+		if str[i] == ' ' {
+			if i == len(str)-1 {
 				continue
 			}
 
-			if s[i+1] != ' ' && count > 0 {
-				return count
+			if str[i+1] != ' ' && lastWordLen > 0 {
+				return lastWordLen
 			}
 
 			continue
 		}
 
-		count++
+		lastWordLen++
 	}
 
-	return count
+	return lastWordLen
 }
 
-func validEntries(s string) bool {
-	if len(s) < 1 || float64(len(s)) > math.Pow10(4) {
+func isEntryStringValid(str string) bool {
+	if len(str) < 1 || float64(len(str)) > math.Pow10(4) {
 		return false
 	}
 

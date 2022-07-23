@@ -5,17 +5,17 @@ import (
 	"strconv"
 )
 
-func isPalindrome(x int) bool {
-	if !validEntry(x) {
+func isPalindrome(num int) bool {
+	if !isEntryNumberValid(num) {
 		return false
 	}
 
-	str := strconv.Itoa(x)
+	strNum := strconv.Itoa(num)
 
-	for i, char := range str[:len(str)/2] {
+	for i, char := range strNum[:len(strNum)/2] {
 		i++
 
-		if uint8(char) != str[len(str)-i] {
+		if uint8(char) != strNum[len(strNum)-i] {
 			return false
 		}
 	}
@@ -23,8 +23,8 @@ func isPalindrome(x int) bool {
 	return true
 }
 
-func validEntry(x int) bool {
-	if float64(x) < -math.Pow(2, 31) || float64(x) > math.Pow(2, 31)-1 {
+func isEntryNumberValid(num int) bool {
+	if float64(num) < -math.Pow(2, 31) || float64(num) > math.Pow(2, 31)-1 {
 		return false
 	}
 

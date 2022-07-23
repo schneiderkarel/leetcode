@@ -2,19 +2,19 @@ package two_sum
 
 import "math"
 
-func twoSum(nums []int, target int) []int {
-	if !validEntries(nums, target) {
+func twoSum(nums []int, targetNum int) []int {
+	if !areEntriesValid(nums, targetNum) {
 		return []int{}
 	}
 
-	for i1, num1 := range nums {
-		for i2, num2 := range nums {
-			if i1 == i2 {
+	for num1i, num1 := range nums {
+		for num2i, num2 := range nums {
+			if num1i == num2i {
 				continue
 			}
 
-			if num1+num2 == target {
-				return []int{i1, i2}
+			if num1+num2 == targetNum {
+				return append([]int{num1i, num2i})
 			}
 		}
 	}
@@ -22,7 +22,19 @@ func twoSum(nums []int, target int) []int {
 	return []int{}
 }
 
-func validEntries(nums []int, target int) bool {
+func areEntriesValid(nums []int, targetNum int) bool {
+	if !areEntryNumbersValid(nums) {
+		return false
+	}
+
+	if !isEntryTargetNumberValid(targetNum) {
+		return false
+	}
+
+	return true
+}
+
+func areEntryNumbersValid(nums []int) bool {
 	if len(nums) < 2 || float64(len(nums)) > math.Pow10(4) {
 		return false
 	}
@@ -33,7 +45,11 @@ func validEntries(nums []int, target int) bool {
 		}
 	}
 
-	if float64(target) < -math.Pow10(9) || float64(target) > math.Pow10(9) {
+	return true
+}
+
+func isEntryTargetNumberValid(targetNum int) bool {
+	if float64(targetNum) < -math.Pow10(9) || float64(targetNum) > math.Pow10(9) {
 		return false
 	}
 
