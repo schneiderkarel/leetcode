@@ -24,4 +24,4 @@ If there is no common prefix, return an empty string `""`.
 - `0 <= strs[i].length <= 200`
 - `strs[i]` consists of only lowercase English letters.
 
-https://leetcode.com/problems/valid-parentheses/
+https://leetcode.com/problems/longest-common-prefix/
