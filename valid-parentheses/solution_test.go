@@ -88,7 +88,7 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "valid - short",
 			args: args{
-				str: "{",
+				str: "{[()]}",
 			},
 			exp: exp{
 				res: true,
@@ -116,6 +116,15 @@ func Test_isEntryStringValid(t *testing.T) {
 			name: "invalid - too long",
 			args: args{
 				str: string(make([]byte, 0, int(math.Pow10(4)+1))),
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+		{
+			name: "invalid - char not parentheses",
+			args: args{
+				str: "a",
 			},
 			exp: exp{
 				res: false,

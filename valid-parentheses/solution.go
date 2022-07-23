@@ -51,5 +51,12 @@ func isEntryStringValid(str string) bool {
 		return false
 	}
 
+	for _, char := range str {
+		if char != 123 && char != 125 && char != 40 && char != 41 && char != 93 && char != 91 {
+			return false
+		}
+
+	}
+
 	return true
 }

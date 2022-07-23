@@ -35,5 +35,17 @@ func isEntryStringValid(str string) bool {
 		return false
 	}
 
+	var chars string
+
+	for _, char := range str {
+		if char != 32 {
+			chars += string(char)
+		}
+	}
+
+	if len(chars) == 0 {
+		return false
+	}
+
 	return true
 }
