@@ -134,16 +134,7 @@ func Test_areEntryNumbersValid(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "valid - long",
-			args: args{
-				nums: make([]int, int(math.Pow10(4))),
-			},
-			exp: exp{
-				res: true,
-			},
-		},
-		{
-			name: "valid - nums",
+			name: "valid",
 			args: args{
 				nums: []int{int(-math.Pow10(9)), int(math.Pow10(9))},
 			},
