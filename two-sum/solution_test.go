@@ -9,8 +9,8 @@ import (
 
 func Test_twoSum(t *testing.T) {
 	type args struct {
-		nums   []int
-		target int
+		nums      []int
+		targetNum int
 	}
 	type exp struct {
 		res []int
@@ -23,8 +23,8 @@ func Test_twoSum(t *testing.T) {
 		{
 			name: "ok positive",
 			args: args{
-				nums:   []int{4, 5, 10, 2, 6},
-				target: 16,
+				nums:      []int{4, 5, 10, 2, 6},
+				targetNum: 16,
 			},
 			exp: exp{
 				res: []int{2, 4},
@@ -33,8 +33,8 @@ func Test_twoSum(t *testing.T) {
 		{
 			name: "ok negative",
 			args: args{
-				nums:   []int{-1, -6, 0},
-				target: -7,
+				nums:      []int{-1, -6, 0},
+				targetNum: -7,
 			},
 			exp: exp{
 				res: []int{1, 0},
@@ -43,8 +43,8 @@ func Test_twoSum(t *testing.T) {
 		{
 			name: "no result",
 			args: args{
-				nums:   []int{1, 2},
-				target: 2,
+				nums:      []int{1, 2},
+				targetNum: 2,
 			},
 			exp: exp{
 				res: []int{},
@@ -53,8 +53,8 @@ func Test_twoSum(t *testing.T) {
 		{
 			name: "invalid entries",
 			args: args{
-				nums:   []int{},
-				target: 0,
+				nums:      []int{},
+				targetNum: 0,
 			},
 			exp: exp{
 				res: []int{},
@@ -64,15 +64,15 @@ func Test_twoSum(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.ElementsMatch(t, tc.exp.res, twoSum(tc.args.nums, tc.args.target))
+			assert.ElementsMatch(t, tc.exp.res, twoSum(tc.args.nums, tc.args.targetNum))
 		})
 	}
 }
 
-func Test_validEntries(t *testing.T) {
+func Test_areEntriesValid(t *testing.T) {
 	type args struct {
-		nums   []int
-		target int
+		nums      []int
+		targetNum int
 	}
 	type exp struct {
 		res bool
@@ -83,80 +83,30 @@ func Test_validEntries(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "valid - edge case 1",
+			name: "valid",
 			args: args{
-				nums:   make([]int, int(math.Pow10(4))),
-				target: int(math.Pow10(9)),
+				nums:      make([]int, int(math.Pow10(4))),
+				targetNum: int(math.Pow10(9)),
 			},
 			exp: exp{
 				res: true,
 			},
 		},
 		{
-			name: "valid - edge case 2",
+			name: "invalid nums",
 			args: args{
-				nums:   []int{int(-math.Pow10(9)), int(math.Pow10(9))},
-				target: int(-math.Pow10(9)),
-			},
-			exp: exp{
-				res: true,
-			},
-		},
-		{
-			name: "not valid - nums too short",
-			args: args{
-				nums:   []int{},
-				target: 0,
+				nums:      []int{},
+				targetNum: 0,
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "not valid - nums too long",
+			name: "invalid target",
 			args: args{
-				nums:   make([]int, int(math.Pow10(4)+1)),
-				target: 0,
-			},
-			exp: exp{
-				res: false,
-			},
-		},
-		{
-			name: "not valid - num in nums too small",
-			args: args{
-				nums:   []int{int(-math.Pow10(9) - 1), 2},
-				target: 0,
-			},
-			exp: exp{
-				res: false,
-			},
-		},
-		{
-			name: "not valid - num in nums too big",
-			args: args{
-				nums:   []int{int(math.Pow10(9) + 1), 2},
-				target: 0,
-			},
-			exp: exp{
-				res: false,
-			},
-		},
-		{
-			name: "not valid - target too small",
-			args: args{
-				nums:   []int{1, 2},
-				target: int(-math.Pow10(9) - 1),
-			},
-			exp: exp{
-				res: false,
-			},
-		},
-		{
-			name: "not valid - target too big",
-			args: args{
-				nums:   []int{1, 2},
-				target: int(math.Pow10(9) + 1),
+				nums:      []int{1, 2},
+				targetNum: int(-math.Pow10(9) - 1),
 			},
 			exp: exp{
 				res: false,
@@ -166,7 +116,130 @@ func Test_validEntries(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, validEntries(tc.args.nums, tc.args.target))
+			assert.Equal(t, tc.exp.res, areEntriesValid(tc.args.nums, tc.args.targetNum))
+		})
+	}
+}
+
+func Test_areEntryNumbersValid(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	type exp struct {
+		res bool
+	}
+	tcs := []struct {
+		name string
+		args args
+		exp  exp
+	}{
+		{
+			name: "valid",
+			args: args{
+				nums: []int{int(-math.Pow10(9)), int(math.Pow10(9))},
+			},
+			exp: exp{
+				res: true,
+			},
+		},
+		{
+			name: "invalid - nums too short",
+			args: args{
+				nums: []int{},
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+		{
+			name: "invalid - nums too long",
+			args: args{
+				nums: make([]int, int(math.Pow10(4)+1)),
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+		{
+			name: "invalid - num in nums too low",
+			args: args{
+				nums: []int{int(-math.Pow10(9) - 1), 2},
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+		{
+			name: "invalid - num in nums too high",
+			args: args{
+				nums: []int{int(math.Pow10(9) + 1), 2},
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+	}
+
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			assert.Equal(t, tc.exp.res, areEntryNumbersValid(tc.args.nums))
+		})
+	}
+}
+
+func Test_isEntryTargetNumberValid(t *testing.T) {
+	type args struct {
+		targetNum int
+	}
+	type exp struct {
+		res bool
+	}
+	tcs := []struct {
+		name string
+		args args
+		exp  exp
+	}{
+		{
+			name: "valid - high",
+			args: args{
+				targetNum: int(math.Pow10(9)),
+			},
+			exp: exp{
+				res: true,
+			},
+		},
+		{
+			name: "valid - low",
+			args: args{
+				targetNum: int(-math.Pow10(9)),
+			},
+			exp: exp{
+				res: true,
+			},
+		},
+		{
+			name: "invalid - target too low",
+			args: args{
+				targetNum: int(-math.Pow10(9) - 1),
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+		{
+			name: "invalid - target too high",
+			args: args{
+				targetNum: int(math.Pow10(9) + 1),
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+	}
+
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			assert.Equal(t, tc.exp.res, isEntryTargetNumberValid(tc.args.targetNum))
 		})
 	}
 }
