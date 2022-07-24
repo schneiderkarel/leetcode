@@ -19,7 +19,7 @@ func Test_longestCommonPrefix(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "valid - prefix",
+			name: "ok - prefix",
 			args: args{
 				strs: []string{"app", "apple", "application"},
 			},
@@ -28,7 +28,7 @@ func Test_longestCommonPrefix(t *testing.T) {
 			},
 		},
 		{
-			name: "valid - no prefix",
+			name: "ok - no prefix",
 			args: args{
 				strs: []string{"apple", "pear", "cherry"},
 			},
@@ -55,9 +55,9 @@ func Test_longestCommonPrefix(t *testing.T) {
 }
 
 func Test_areEntryStringsValid(t *testing.T) {
-	var longStrs []string
+	var validMaxLenStrs []string
 	for i := 0; i < 200; i++ {
-		longStrs = append(longStrs, "a")
+		validMaxLenStrs = append(validMaxLenStrs, "a")
 	}
 
 	type args struct {
@@ -83,7 +83,7 @@ func Test_areEntryStringsValid(t *testing.T) {
 		{
 			name: "valid - long",
 			args: args{
-				strs: longStrs,
+				strs: validMaxLenStrs,
 			},
 			exp: exp{
 				res: true,
@@ -101,7 +101,7 @@ func Test_areEntryStringsValid(t *testing.T) {
 		{
 			name: "invalid - too long",
 			args: args{
-				strs: append(longStrs, "a"),
+				strs: make([]string, 201),
 			},
 			exp: exp{
 				res: false,

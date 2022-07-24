@@ -21,7 +21,7 @@ func Test_twoSum(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "ok positive",
+			name: "ok - positive",
 			args: args{
 				nums:      []int{4, 5, 10, 2, 6},
 				targetNum: 16,
@@ -31,7 +31,7 @@ func Test_twoSum(t *testing.T) {
 			},
 		},
 		{
-			name: "ok negative",
+			name: "ok - negative",
 			args: args{
 				nums:      []int{-1, -6, 0},
 				targetNum: -7,
@@ -41,7 +41,7 @@ func Test_twoSum(t *testing.T) {
 			},
 		},
 		{
-			name: "no result",
+			name: "ok - no result",
 			args: args{
 				nums:      []int{1, 2},
 				targetNum: 2,
