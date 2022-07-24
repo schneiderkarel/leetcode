@@ -9,22 +9,17 @@ func maxProfit(prices []int) int {
 
 	var (
 		min    = prices[0]
-		max    = prices[0]
 		profit int
 	)
 
 	for _, price := range prices {
-		if price > max {
-			max = price
-		}
-
 		if price < min {
 			min = price
-			max = min
+			continue
 		}
-		
-		if max-min > profit {
-			profit = max - min
+
+		if price-min > profit {
+			profit = price - min
 		}
 	}
 
