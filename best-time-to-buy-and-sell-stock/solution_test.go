@@ -1,4 +1,4 @@
-package valid_parentheses
+package best_time_to_buy_and_sell_stock
 
 import (
 	"math"
@@ -7,12 +7,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_isValid(t *testing.T) {
+func Test_maxProfit(t *testing.T) {
 	type args struct {
-		str string
+		prices []int
 	}
 	type exp struct {
-		res bool
+		res int
 	}
 	tcs := []struct {
 		name string
@@ -20,62 +20,44 @@ func Test_isValid(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "ok",
+			name: "ok - profit",
 			args: args{
-				str: "{()[]}",
+				prices: []int{2, 4, 10, 9, 0},
 			},
 			exp: exp{
-				res: true,
+				res: 8,
 			},
 		},
 		{
-			name: "invalid",
+			name: "ok - no profit",
 			args: args{
-				str: "{([)]}",
+				prices: []int{5, 2, 1, 0},
 			},
 			exp: exp{
-				res: false,
-			},
-		},
-		{
-			name: "invalid - empty queue",
-			args: args{
-				str: "})",
-			},
-			exp: exp{
-				res: false,
-			},
-		},
-		{
-			name: "invalid - one char",
-			args: args{
-				str: "{",
-			},
-			exp: exp{
-				res: false,
+				res: 0,
 			},
 		},
 		{
 			name: "invalid entry",
 			args: args{
-				str: "",
+				prices: []int{},
 			},
 			exp: exp{
-				res: false,
+				res: 0,
 			},
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, isValid(tc.args.str))
+			assert.Equal(t, tc.exp.res, maxProfit(tc.args.prices))
 		})
 	}
 }
 
-func Test_isEntryStringValid(t *testing.T) {
+func Test_areEntryPricesValid(t *testing.T) {
 	type args struct {
-		str string
+		prices []int
 	}
 	type exp struct {
 		res bool
@@ -88,7 +70,7 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "valid - short",
 			args: args{
-				str: "{[()]}",
+				prices: []int{1},
 			},
 			exp: exp{
 				res: true,
@@ -97,16 +79,16 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "valid - long",
 			args: args{
-				str: string(make([]byte, int(math.Pow10(4)))),
+				prices: make([]int, int(math.Pow10(5))),
 			},
 			exp: exp{
-				res: false,
+				res: true,
 			},
 		},
 		{
 			name: "invalid - too short",
 			args: args{
-				str: "",
+				prices: []int{},
 			},
 			exp: exp{
 				res: false,
@@ -115,16 +97,25 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "invalid - too long",
 			args: args{
-				str: string(make([]byte, int(math.Pow10(4)+1))),
+				prices: make([]int, int(math.Pow10(5))+1),
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid - char not parentheses",
+			name: "invalid - prices price too low",
 			args: args{
-				str: "a",
+				prices: []int{-1},
+			},
+			exp: exp{
+				res: false,
+			},
+		},
+		{
+			name: "invalid - prices price too low",
+			args: args{
+				prices: []int{int(math.Pow10(4) + 1)},
 			},
 			exp: exp{
 				res: false,
@@ -134,7 +125,7 @@ func Test_isEntryStringValid(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, isEntryStringValid(tc.args.str))
+			assert.Equal(t, tc.exp.res, areEntryPricesValid(tc.args.prices))
 		})
 	}
 }

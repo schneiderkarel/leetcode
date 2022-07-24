@@ -20,7 +20,7 @@ func Test_isPalindrome(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "positive palindrome num",
+			name: "ok - positive palindrome num",
 			args: args{
 				num: 1001,
 			},
@@ -29,7 +29,7 @@ func Test_isPalindrome(t *testing.T) {
 			},
 		},
 		{
-			name: "negative non-palindrome num",
+			name: "ok - negative non-palindrome num",
 			args: args{
 				num: -1001,
 			},
@@ -38,7 +38,7 @@ func Test_isPalindrome(t *testing.T) {
 			},
 		},
 		{
-			name: "positive non-palindrome num",
+			name: "ok - positive non-palindrome num",
 			args: args{
 				num: 100,
 			},
