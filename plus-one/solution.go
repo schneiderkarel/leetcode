@@ -8,20 +8,20 @@ func plusOne(digits []int) []int {
 	return recursiveCallsOverDigits(len(digits)-1, digits[len(digits)-1], digits)
 }
 
-func recursiveCallsOverDigits(currentDigitIndex int, currentDigit int, digits []int) []int {
+func recursiveCallsOverDigits(currentDigitIndex int, currentDigit int, currentDigits []int) []int {
 	if currentDigit == 9 {
-		digits[currentDigitIndex] = 0
+		currentDigits[currentDigitIndex] = 0
 
 		if currentDigitIndex-1 >= 0 {
-			digits = recursiveCallsOverDigits(currentDigitIndex-1, digits[currentDigitIndex-1], digits)
+			currentDigits = recursiveCallsOverDigits(currentDigitIndex-1, currentDigits[currentDigitIndex-1], currentDigits)
 		} else {
-			digits = append([]int{1}, digits...)
+			currentDigits = append([]int{1}, currentDigits...)
 		}
 	} else {
-		digits[currentDigitIndex]++
+		currentDigits[currentDigitIndex]++
 	}
 
-	return digits
+	return currentDigits
 }
 
 func areEntryDigitsValid(digits []int) bool {
