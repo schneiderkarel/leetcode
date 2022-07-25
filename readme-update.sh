@@ -28,7 +28,7 @@ Each directory contains one *[Leetcode](https://www.leetcode.com)* question. Ins
 2. \`solution.go\` - contains the functionality to solve the problem.
 3. \`solution_test.go\` - contains unit tests to validate the code inside \`solution.go\`.
 
-### Amount of Questions:
+### Question Types:
 
     Easy: $easy_questions_counter
     Medium: $medium_questions_counter
