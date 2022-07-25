@@ -33,4 +33,6 @@ Each directory contains one *[Leetcode](https://www.leetcode.com)* question. Ins
     Easy: $easy_questions_counter
     Medium: $medium_questions_counter
     Hard: $hard_questions_counter
+
+    Total: `expr $easy_questions_counter + $medium_questions_counter + $hard_questions_counter`
 EOM
