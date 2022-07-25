@@ -24,11 +24,3 @@ jobs:
 
       - name: Test
         run: go test -v ./...
-
-  update-readme:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Update root README.md
-        run: sh readme-udpate.sh

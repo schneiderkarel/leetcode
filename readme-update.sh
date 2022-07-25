@@ -16,7 +16,7 @@ do
       ((hard_questions_counter = hard_questions_counter + 1))
   fi
 done
-íí
+
 cat > README.md  << EOM
 # Leetcode
 
