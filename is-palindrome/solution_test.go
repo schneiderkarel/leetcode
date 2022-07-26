@@ -1,4 +1,4 @@
-package length_of_last_word
+package climbing_stairs
 
 import (
 	"math"
@@ -7,12 +7,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_lengthOfLastWord(t *testing.T) {
+func Test_isPalindrome(t *testing.T) {
 	type args struct {
 		str string
 	}
 	type exp struct {
-		res int
+		res bool
 	}
 	tcs := []struct {
 		name string
@@ -20,46 +20,85 @@ func Test_lengthOfLastWord(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "ok - prefix space",
+			name: "ok - palindrome",
 			args: args{
-				str: "   pear apple",
+				str: "A man, a plan, a canal: Panama",
 			},
 			exp: exp{
-				res: 5,
+				res: true,
 			},
 		},
 		{
-			name: "ok - suffix space",
+			name: "ok - not palindrome",
 			args: args{
-				str: "pear apple   ",
+				str: "A man, a planz, a canal: Panama",
 			},
 			exp: exp{
-				res: 5,
+				res: false,
 			},
 		},
 		{
-			name: "ok - short",
+			name: "ok - empty",
 			args: args{
-				str: "a ",
+				str: " ",
 			},
 			exp: exp{
-				res: 1,
+				res: true,
 			},
 		},
 		{
 			name: "invalid entry",
 			args: args{
-				str: "",
+				str: "á",
 			},
 			exp: exp{
-				res: 0,
+				res: false,
 			},
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, lengthOfLastWord(tc.args.str))
+			assert.Equal(t, tc.exp.res, isPalindrome(tc.args.str))
+		})
+	}
+}
+
+func Test_normalizeString(t *testing.T) {
+	type args struct {
+		str string
+	}
+	type exp struct {
+		res string
+	}
+	tcs := []struct {
+		name string
+		args args
+		exp  exp
+	}{
+		{
+			name: "ok",
+			args: args{
+				str: "A man, a plan, a canal: Panama",
+			},
+			exp: exp{
+				res: "amanaplanacanalpanama",
+			},
+		},
+		{
+			name: "empty",
+			args: args{
+				str: "  ",
+			},
+			exp: exp{
+				res: "",
+			},
+		},
+	}
+
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			assert.Equal(t, tc.exp.res, normalizeString(tc.args.str))
 		})
 	}
 }
@@ -88,7 +127,7 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "valid - long",
 			args: args{
-				str: string(make([]byte, int(math.Pow10(4)))),
+				str: string(make([]byte, int(2*math.Pow10(5)))),
 			},
 			exp: exp{
 				res: true,
@@ -106,16 +145,16 @@ func Test_isEntryStringValid(t *testing.T) {
 		{
 			name: "invalid - too long",
 			args: args{
-				str: string(make([]byte, int(math.Pow10(4)+1))),
+				str: string(make([]byte, int(2*math.Pow10(5))+1)),
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid - string contains whitespace char",
+			name: "invalid - string contains not ascii char",
 			args: args{
-				str: "      ",
+				str: "héllo",
 			},
 			exp: exp{
 				res: false,

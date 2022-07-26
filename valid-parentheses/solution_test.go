@@ -122,7 +122,7 @@ func Test_isEntryStringValid(t *testing.T) {
 			},
 		},
 		{
-			name: "invalid - char not parentheses",
+			name: "invalid - string char contains non parentheses char",
 			args: args{
 				str: "a",
 			},

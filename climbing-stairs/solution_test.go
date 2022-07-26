@@ -45,7 +45,7 @@ func Test_climbStairs(t *testing.T) {
 	}
 }
 
-func Test_isEntryValid(t *testing.T) {
+func Test_isEntryNumberValid(t *testing.T) {
 	type args struct {
 		num int
 	}
