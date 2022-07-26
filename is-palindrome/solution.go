@@ -10,10 +10,10 @@ func isPalindrome(str string) bool {
 		return false
 	}
 
-	normStr := normalizeString(str)
+	normalizedStr := normalizeString(str)
 
-	for i := 0; i < len(normStr)/2; i++ {
-		if normStr[i] != normStr[len(normStr)-1-i] {
+	for i := 0; i < len(normalizedStr)/2; i++ {
+		if normalizedStr[i] != normalizedStr[len(normalizedStr)-1-i] {
 			return false
 		}
 	}
@@ -22,7 +22,7 @@ func isPalindrome(str string) bool {
 }
 
 func normalizeString(str string) string {
-	var normStr string
+	var normalizedStr string
 
 	for i := 0; i < len(str); i++ {
 		char := str[i]
@@ -32,11 +32,11 @@ func normalizeString(str string) string {
 				char += 32
 			}
 
-			normStr += string(char)
+			normalizedStr += string(char)
 		}
 	}
 
-	return normStr
+	return normalizedStr
 }
 
 func isEntryStringValid(str string) bool {
