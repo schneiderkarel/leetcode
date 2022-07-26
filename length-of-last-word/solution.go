@@ -1,8 +1,6 @@
 package length_of_last_word
 
-import (
-	"math"
-)
+import "math"
 
 func lengthOfLastWord(str string) int {
 	if !isEntryStringValid(str) {
