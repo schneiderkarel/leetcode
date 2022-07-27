@@ -10,8 +10,8 @@ Each directory contains one *[Leetcode](https://www.leetcode.com)* question. Ins
 
 ### Question Types:
 
-    Easy: 10
+    Easy: 11
     Medium: 0
     Hard: 0
 
-    Total: 10
+    Total: 11
