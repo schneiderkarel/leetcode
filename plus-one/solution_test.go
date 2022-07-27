@@ -19,7 +19,7 @@ func Test_plusOne(t *testing.T) {
 		exp  exp
 	}{
 		{
-			name: "ok - 1",
+			name: "ok",
 			args: args{
 				digits: []int{1, 9, 9},
 			},
@@ -71,7 +71,7 @@ func Test_recursiveCallsOverDigits(t *testing.T) {
 			},
 		},
 		{
-			name: "ok - 3",
+			name: "ok - 2",
 			args: args{
 				index:  0,
 				digit:  9,
