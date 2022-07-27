@@ -1,4 +1,4 @@
-package climbing_stairs
+package is_palindrome
 
 import (
 	"math"
