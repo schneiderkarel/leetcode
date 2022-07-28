@@ -18,7 +18,7 @@ Given a string `s`, find the length of the **longest substring** without repeati
     Output: 1
     Explanation: The answer is "b", with the length of 1.
 
-**Example 2:**
+**Example 3:**
     
     Input: s = "pwwkew"
     Output: 3
