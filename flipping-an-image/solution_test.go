@@ -1,18 +1,17 @@
-package minimum_consecutive_cards_to_pick_up
+package flipping_an_image
 
 import (
-	"math"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_minimumCardPickup(t *testing.T) {
+func Test_flipAndInvertImage(t *testing.T) {
 	type args struct {
-		cards []int
+		image [][]int
 	}
 	type exp struct {
-		res int
+		res [][]int
 	}
 	tcs := []struct {
 		name string
@@ -22,51 +21,46 @@ func Test_minimumCardPickup(t *testing.T) {
 		{
 			name: "ok",
 			args: args{
-				cards: []int{1, 2, 3, 4, 5, 1, 1, 1},
+				image: [][]int{
+					{1, 0, 1},
+					{0, 1, 0},
+					{1, 0, 1},
+				},
 			},
 			exp: exp{
-				res: 2,
-			},
-		},
-		{
-			name: "ok - not matching",
-			args: args{
-				cards: []int{1, 2, 3, 4, 5, 6},
-			},
-			exp: exp{
-				res: -1,
-			},
-		},
-		{
-			name: "???",
-			args: args{
-				cards: []int{3, 4, 2, 3, 4, 7},
-			},
-			exp: exp{
-				res: 4,
+				res: [][]int{
+					{0, 1, 0},
+					{1, 0, 1},
+					{0, 1, 0},
+				},
 			},
 		},
 		{
 			name: "invalid entry",
 			args: args{
-				cards: []int{},
+				image: [][]int{},
 			},
 			exp: exp{
-				res: -1,
+				res: [][]int{},
 			},
 		},
 	}
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, minimumCardPickup(tc.args.cards))
+			assert.Equal(t, tc.exp.res, flipAndInvertImage(tc.args.image))
 		})
 	}
 }
 
-func Test_areEntryNumbersValid(t *testing.T) {
+func Test_isEntryImageValid(t *testing.T) {
+	var validHighImage [][]int
+	for i := 0; i < 20; i++ {
+		validHighImage = append(validHighImage, make([]int, 20))
+	}
+
 	type args struct {
-		cards []int
+		image [][]int
 	}
 	type exp struct {
 		res bool
@@ -79,7 +73,9 @@ func Test_areEntryNumbersValid(t *testing.T) {
 		{
 			name: "valid - low",
 			args: args{
-				cards: []int{0, int(math.Pow10(6))},
+				image: [][]int{
+					{1},
+				},
 			},
 			exp: exp{
 				res: true,
@@ -88,7 +84,7 @@ func Test_areEntryNumbersValid(t *testing.T) {
 		{
 			name: "valid - high",
 			args: args{
-				cards: make([]int, int(math.Pow10(5))),
+				image: validHighImage,
 			},
 			exp: exp{
 				res: true,
@@ -97,7 +93,7 @@ func Test_areEntryNumbersValid(t *testing.T) {
 		{
 			name: "invalid - too low",
 			args: args{
-				cards: []int{},
+				image: [][]int{},
 			},
 			exp: exp{
 				res: false,
@@ -106,25 +102,30 @@ func Test_areEntryNumbersValid(t *testing.T) {
 		{
 			name: "invalid - too high",
 			args: args{
-				cards: make([]int, int(math.Pow10(5))+1),
+				image: make([][]int, 21),
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid - cards card too low",
+			name: "invalid - image pixels shorter than image",
 			args: args{
-				cards: []int{-1},
+				image: [][]int{
+					{1, 0, 1},
+					{0, 1},
+				},
 			},
 			exp: exp{
 				res: false,
 			},
 		},
 		{
-			name: "invalid - cards card too high",
+			name: "invalid - image pixels contain not allowed digit",
 			args: args{
-				cards: []int{int(math.Pow10(6) + 1)},
+				image: [][]int{
+					{10},
+				},
 			},
 			exp: exp{
 				res: false,
@@ -134,7 +135,7 @@ func Test_areEntryNumbersValid(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.exp.res, areEntryNumbersValid(tc.args.cards))
+			assert.Equal(t, tc.exp.res, isEntryImageValid(tc.args.image))
 		})
 	}
 }
