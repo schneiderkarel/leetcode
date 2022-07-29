@@ -11,7 +11,7 @@ Each directory contains one *[Leetcode](https://www.leetcode.com)* question. Ins
 ### Question Types:
 
     Easy: 12
-    Medium: 2
+    Medium: 3
     Hard: 0
 
-    Total: 14
+    Total: 15
